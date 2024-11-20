@@ -1,0 +1,35 @@
+services:
+  caddy:
+    image: caddy:2.9-alpine@sha256:9cc41f26f734861421d99f00fc962b3a3181aab9b4dbd0ac7751a883623794b6
+    container_name: caddy
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./Caddyfile:/etc/caddy/Caddyfile
+
+  n8n:
+    image: n8nio/n8n:1.69.0@sha256:8cadb64bc988d68f94de44cd7cc775aad53001c54b7a95d14482e8c8c0c53c1f
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    env_file:
+      - .env
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+# Create the volumes with `docker volume create <volume_name>`
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
+    external: true
+  n8n_data:
+    external: true
