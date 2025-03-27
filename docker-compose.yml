@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: caddy:2.9-alpine@sha256:b60636634fd2aebaf9460cf60997ad83aad6b139318d5713e2b78a60f52b139c
+    image: caddy:2.9-alpine@sha256:b4e3952384eb9524a887633ce65c752dd7c71314d2c2acf98cd5c715aaa534f0
     container_name: caddy
     restart: unless-stopped
     env_file:
@@ -15,7 +15,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
 
   n8n:
-    image: n8nio/n8n:1.77.3@sha256:213dd7565080e877110af43741d730fc318feac6987de71852dce048ab8e1dee
+    image: n8nio/n8n:1.84.3@sha256:32958c20b771afbfa467fa3fda3ac618164436e69dece9ae29989e69a3e35c89
     container_name: n8n
     restart: unless-stopped
     ports:
