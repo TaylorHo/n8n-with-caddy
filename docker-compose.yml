@@ -15,7 +15,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
 
   n8n:
-    image: n8nio/n8n:1.123.10
+    image: n8nio/n8n:1.123.20
     container_name: n8n
     restart: unless-stopped
     ports:
