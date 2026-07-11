@@ -15,7 +15,7 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
 
   n8n:
-    image: n8nio/n8n:1.123.60
+    image: n8nio/n8n:2.29.10
     container_name: n8n
     restart: unless-stopped
     ports:
@@ -24,6 +24,16 @@ services:
       - .env
     volumes:
       - n8n_data:/home/node/.n8n
+
+  task-runners:
+    image: n8nio/runners:2.29.10
+    container_name: n8n-runners
+    environment:
+      - N8N_RUNNERS_TASK_BROKER_URI=http://n8n:5679
+      - N8N_RUNNERS_AUTH_TOKEN=secret-token
+      - N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT=15
+    depends_on:
+      - n8n
 
 # Create the volumes with `docker volume create <volume_name>`
 volumes:
