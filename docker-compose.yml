@@ -13,9 +13,9 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile
-    mem_limit: 40m
+    mem_limit: 30m
     mem_reservation: 20m
-    memswap_limit: 60m
+    memswap_limit: 40m
     oom_score_adj: -200
 
   n8n:
@@ -28,9 +28,9 @@ services:
       - .env
     volumes:
       - n8n_data:/home/node/.n8n
-    mem_limit: 512m
-    mem_reservation: 380m
-    memswap_limit: 720m
+    mem_limit: 580m
+    mem_reservation: 440m
+    memswap_limit: 740m
     oom_score_adj: 100
 
 # Create the volumes with `docker volume create <volume_name>`
