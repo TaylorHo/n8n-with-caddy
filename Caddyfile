@@ -6,8 +6,7 @@
 localhost {
 	# serve robots.txt to prevent indexing
 	route /robots.txt {
-		respond "User-agent: *
-Disallow: /" 200
+		respond "User-agent: *\nDisallow: /" 200
 	}
 
 	reverse_proxy n8n:5678 {
