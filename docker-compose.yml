@@ -38,10 +38,35 @@ services:
       options:
         max-size: "2m"
         max-file: "3"
-    mem_limit: 580m
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          'wget -q -O - http://0.0.0.0:5678/healthz | grep -qF ''"status":"ok"'' || exit 1',
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    mem_limit: 600m
     mem_reservation: 440m
     memswap_limit: 740m
     oom_score_adj: 100
+
+  autoheal:
+    image: willfarrell/autoheal:1.2.0
+    container_name: autoheal
+    restart: unless-stopped
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    mem_limit: 16m
+    mem_reservation: 10m
+    memswap_limit: 20m
+    oom_score_adj: -200
 
 # Create the volumes with `docker volume create <volume_name>`
 volumes:
