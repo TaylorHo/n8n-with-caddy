@@ -13,6 +13,11 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2m"
+        max-file: "3"
     mem_limit: 30m
     mem_reservation: 20m
     memswap_limit: 40m
@@ -28,6 +33,11 @@ services:
       - .env
     volumes:
       - n8n_data:/home/node/.n8n
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2m"
+        max-file: "3"
     mem_limit: 580m
     mem_reservation: 440m
     memswap_limit: 740m
